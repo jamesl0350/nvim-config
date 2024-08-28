@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "james.plugins" }, {import = "james.plugins.lsp"} }, {
+require("lazy").setup({ { import = "james.plugins" }, { import = "james.plugins.lsp" } }, {
   checker = {
     enabled = true,
     notify = false,
@@ -19,4 +19,15 @@ require("lazy").setup({ { import = "james.plugins" }, {import = "james.plugins.l
   change_detection = {
     notify = false,
   },
+})
+-- Python environment
+local util = require("lspconfig/util")
+local path = util.path
+require("lspconfig").pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  before_init = function(_, config)
+    default_venv_path = path.join(vim.env.HOME, "virtualenvs", "nvim-venv", "bin", "python")
+    config.settings.python.pythonPath = default_venv_path
+  end,
 })
