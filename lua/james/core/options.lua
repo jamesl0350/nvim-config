@@ -11,6 +11,10 @@ opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
+--enable undercurl
+vim.cmd([[let &t_Cs = "\e[4:3m]"]])
+vim.cmd([[let &t_Ce = "\e[4:0m]"]])
+
 --show tab characters and trailing whitespace
 opt.list = true
 --incrementally highlight searches as you type
@@ -43,8 +47,8 @@ opt.undofile = true
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
--- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+opt.clipboard = "unnamedplus,unnamed" -- clipboard
+-- use system clipboard as default register
 
 -- split windows
 opt.splitright = true -- split vertical window to the right
